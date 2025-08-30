@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Love Letter</title>
+<style>
+  html,body{height:100%;margin:0;font-family:'Georgia',serif;background:#f8f2ec;overflow:hidden;}
+  body{display:flex;align-items:center;justify-content:center;perspective:1400px;}
+  
+  /* envelope */
+  .envelope{
+    position:relative;width:min(90vw,320px);height:min(60vw,220px);
+    background:#fff;border:2px solid #d4b5a1;border-radius:6px;overflow:hidden;
+    transform-style:preserve-3d;cursor:pointer;transition:transform 1s ease;
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+  }
+  .envelope.open{transform:rotateX(180deg);}
+  
+  /* front side */
+  .front, .back{
+    position:absolute;top:0;left:0;width:100%;height:100%;
+    backface-visibility:hidden;display:flex;align-items:center;justify-content:center;
+  }
+  .front{background:linear-gradient(135deg,#fff,#fbe9e7);}
+  .front span{font-size:1.5rem;color:#b23a48;font-weight:bold;}
+  
+  /* back side (letter) */
+  .back{
+    background:#fff;transform:rotateX(180deg);padding:1.5rem;box-sizing:border-box;
+    text-align:center;line-height:1.5;color:#333;font-size:1rem;overflow-y:auto;
+  }
+  .back h2{margin-top:0;color:#b23a48;}
+  
+  /* floating hearts */
+  .heart{position:fixed;bottom:-20px;font-size:20px;animation:rise 6s linear infinite;opacity:.8;}
+  @keyframes rise{
+    0%{transform:translateY(0) scale(1);}
+    100%{transform:translateY(-110vh) scale(1.4);opacity:0;}
+  }
+</style>
+</head>
+<body>
+  <div class="envelope" id="env">
+    <div class="front"><span>💌 Tap to open</span></div>
+    <div class="back">
+      <h2>My Love ❤️</h2>
+      <p>
+        From the moment I met you, my world became brighter.  
+        Every laugh, every word, every glance from you fills me with joy.  
+        You are my heart, my peace, my forever.  
+      </p>
+      <p>
+        No matter where life takes us, know that I will always  
+        stand by you, love you, and cherish you endlessly.  
+      </p>
+      <p>
+        You are my everything — my today, my tomorrow, and my always.  
+      </p>
+      <p style="margin-top:1.5rem;font-weight:bold;">I love you. 💖</p>
+    </div>
+  </div>
+
+<script>
+  const env=document.getElementById('env');
+  env.addEventListener('click',()=>{ env.classList.toggle('open'); });
+
+  // floating hearts background
+  function heart(){
+    const el=document.createElement('div');
+    el.className='heart';
+    el.textContent=['❤️','💖','💕','🩷','💘'][Math.floor(Math.random()*5)];
+    el.style.left=Math.random()*100+'vw';
+    el.style.fontSize=(18+Math.random()*24)+'px';
+    el.style.animationDuration=(4+Math.random()*4)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),8000);
+  }
+  setInterval(heart,800);
+</script>
+</body>
+</html>
